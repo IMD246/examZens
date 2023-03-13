@@ -88,7 +88,17 @@ class _MyHomePageState extends State<MyHomePage> {
         future: jokeProvider.initJoke(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return const Row(
+              children: [
+                Spacer(),
+                CircularProgressIndicator(
+                  color: Color(
+                    0xff29b363,
+                  ),
+                ),
+                Spacer(),
+              ],
+            );
           }
           return Column(
             children: [
