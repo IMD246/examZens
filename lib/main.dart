@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: _body1(),
             ),
             Expanded(
-              flex: 5,
+              flex: 6,
               child: _body2(jokeProvider),
             ),
             Expanded(
@@ -92,19 +92,22 @@ class _MyHomePageState extends State<MyHomePage> {
           }
           return Column(
             children: [
-              const Spacer(),
+              const Spacer(flex: 2),
               Expanded(
-                flex: 6,
+                flex: 10,
                 child: Consumer<JokeProvider>(
                   builder: (context, value, child) {
-                    return Text(
-                      value.listJokes.isEmpty
-                          ? "That's all the jokes for today! Come back another day!"
-                          : value.listJokes.first.content ?? "",
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.black.withOpacity(
-                          0.6,
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(
+                        value.listJokes.isEmpty
+                            ? "That's all the jokes for today! Come back another day!"
+                            : value.listJokes.first.content ?? "",
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(
+                            0xff6b6b6b,
+                          ),
                         ),
                       ),
                     );
@@ -114,35 +117,36 @@ class _MyHomePageState extends State<MyHomePage> {
               const Spacer(),
               Expanded(
                 flex: 2,
-                child: Row(
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: _likeButton(
-                        press: () async {
-                          await jokeProvider.processingGame(
-                            value: true,
-                          );
-                        },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 7,
+                        child: _likeButton(
+                          press: () async {
+                            await jokeProvider.processingGame(
+                              value: true,
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 24,
-                    ),
-                    Flexible(
-                      flex: 2,
-                      child: _dislikeButton(
-                        press: () async {
-                          await jokeProvider.processingGame(
-                            value: false,
-                          );
-                        },
+                      const Spacer(),
+                      Expanded(
+                        flex: 8,
+                        child: _dislikeButton(
+                          press: () async {
+                            await jokeProvider.processingGame(
+                              value: false,
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              const Spacer(),
+              const Spacer(flex: 2),
             ],
           );
         },
@@ -154,7 +158,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return InkWell(
       onTap: press,
       child: Container(
-        color: Colors.green.withOpacity(0.85),
+        color: const Color(
+          0xff29b363,
+        ),
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -163,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
           "This is not Funny.",
           style: TextStyle(
             color: Colors.white,
-            fontSize: 15,
+            fontSize: 13,
           ),
         ),
       ),
@@ -174,7 +180,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return InkWell(
       onTap: press,
       child: Container(
-        color: Colors.blue,
+        color: const Color(
+          0xff2c7edb,
+        ),
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -183,6 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
           "This is Funny!",
           style: TextStyle(
             color: Colors.white,
+            fontSize: 13,
           ),
         ),
       ),
@@ -203,27 +212,27 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      child: Column(
+      child: const Column(
         children: [
           Text(
             "This appis created as part of Hlosulutions program. The materials con-tained on this website are provided for general information only and do not constitute any form of advice. HLS assumes no responsibility for the accuaracy of any particular statement and accepts no liability for any loss or damage which may arise from reliance on the infor-mation contained on this site.",
             style: TextStyle(
-              fontSize: 12,
-              color: Colors.black.withOpacity(
-                0.5,
+              fontSize: 11,
+              color: Color(
+                0xff6f6f6f,
               ),
             ),
             textAlign: TextAlign.center,
           ),
-          const Spacer(),
+          Spacer(),
           Padding(
-            padding: const EdgeInsets.only(bottom: 4.0),
+            padding: EdgeInsets.only(bottom: 4.0),
             child: Text(
               "Copyright 2021 HLS",
               style: TextStyle(
-                fontSize: 14,
-                color: Colors.black.withOpacity(
-                  0.6,
+                fontSize: 11,
+                color: Color(
+                  0xff6b6b6b,
                 ),
               ),
             ),
@@ -235,27 +244,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Container _body1() {
     return Container(
-      color: Colors.green.withOpacity(0.8),
+      color: const Color(
+        0xff29b363,
+      ),
       alignment: Alignment.center,
-      child: Column(
+      child: const Column(
         children: [
-          const Spacer(flex: 3),
+          Spacer(flex: 3),
           Text(
             "A joke a day keeps the doctor away",
             style: TextStyle(
-              color: Colors.white.withOpacity(0.95),
-              fontSize: 17,
+              color: Color(0xffffffff),
+              fontSize: 15,
             ),
           ),
-          const Spacer(flex: 2),
+          Spacer(flex: 2),
           Text(
             "If you joke wrong way, your teeth have to pay. (Serious)",
             style: TextStyle(
-              color: Colors.white.withOpacity(0.92),
-              fontSize: 12,
+              color: Color(0xffffffff),
+              fontSize: 10,
             ),
           ),
-          const Spacer(flex: 3),
+          Spacer(flex: 3),
         ],
       ),
     );
@@ -269,49 +280,57 @@ class _MyHomePageState extends State<MyHomePage> {
         right: 16,
         left: 24,
       ),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Image.asset(
-          "assets/icons/ic_app.png",
-          fit: BoxFit.contain,
-          width: 64,
-          height: 64,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  "Handicrafted by",
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(
-                      0.45,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Image.asset(
+            "assets/icons/ic_app.png",
+            fit: BoxFit.contain,
+            width: 64,
+            height: 64,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Spacer(flex: 2),
+                  Text(
+                    "Handicrafted by",
+                    style: TextStyle(
+                      color: Color(
+                        0xff949494,
+                      ),
+                      fontSize: 10,
                     ),
-                    fontSize: 12,
                   ),
-                ),
-                Text(
-                  "Jim HLS",
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(
-                      0.8,
+                  Text(
+                    "Jim HLS",
+                    style: TextStyle(
+                      color: Color(
+                        0xff6b6b6b,
+                      ),
+                      fontSize: 9,
                     ),
-                    fontSize: 12,
                   ),
-                ),
-              ],
-            ),
-            Image.asset(
-              "assets/icons/ic_avatar.png",
-              fit: BoxFit.contain,
-              width: 64,
-              height: 64,
-            ),
-          ],
-        ),
-      ]),
+                  Spacer(),
+                ],
+              ),
+              const SizedBox(
+                width: 2,
+              ),
+              Image.asset(
+                "assets/icons/ic_avatar.png",
+                fit: BoxFit.contain,
+                width: 64,
+                height: 64,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
